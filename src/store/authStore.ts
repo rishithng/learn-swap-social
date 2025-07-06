@@ -1,4 +1,3 @@
-
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
@@ -54,13 +53,112 @@ const mockUsers = [
     skillsKnown: 'Graphic Design, Video Editing',
     skillsToLearn: 'UI/UX Design, Figma',
     bio: 'Creative designer looking to improve digital design skills'
+  },
+  {
+    username: 'diana',
+    name: 'Diana Prince',
+    phone: '101-202-3030',
+    age: 30,
+    city: 'Berlin',
+    skillsKnown: 'Digital Marketing, Content Creation',
+    skillsToLearn: 'SEO, Analytics',
+    bio: 'Marketing professional wanting to master technical aspects'
+  },
+  {
+    username: 'evan',
+    name: 'Evan Rodriguez',
+    phone: '321-654-9870',
+    age: 26,
+    city: 'Barcelona',
+    skillsKnown: 'Photography, Lightroom',
+    skillsToLearn: 'Video Production, After Effects',
+    bio: 'Photographer transitioning into videography and motion graphics'
+  },
+  {
+    username: 'fiona',
+    name: 'Fiona Chen',
+    phone: '555-123-4567',
+    age: 32,
+    city: 'Tokyo',
+    skillsKnown: 'React, TypeScript',
+    skillsToLearn: 'Mobile Development, Flutter',
+    bio: 'Frontend developer interested in cross-platform mobile apps'
+  },
+  {
+    username: 'george',
+    name: 'George Williams',
+    phone: '666-777-8888',
+    age: 29,
+    city: 'Sydney',
+    skillsKnown: 'DevOps, AWS',
+    skillsToLearn: 'Kubernetes, Docker',
+    bio: 'Cloud engineer looking to master containerization technologies'
+  },
+  {
+    username: 'hannah',
+    name: 'Hannah Davis',
+    phone: '888-999-0000',
+    age: 24,
+    city: 'Toronto',
+    skillsKnown: 'Content Writing, Copywriting',
+    skillsToLearn: 'Technical Writing, Documentation',
+    bio: 'Writer wanting to specialize in technical communication'
+  },
+  {
+    username: 'ivan',
+    name: 'Ivan Petrov',
+    phone: '222-333-4444',
+    age: 35,
+    city: 'Moscow',
+    skillsKnown: 'Cybersecurity, Penetration Testing',
+    skillsToLearn: 'Blockchain, Smart Contracts',
+    bio: 'Security expert exploring decentralized technologies'
+  },
+  {
+    username: 'jade',
+    name: 'Jade Thompson',
+    phone: '333-444-5555',
+    age: 27,
+    city: 'San Francisco',
+    skillsKnown: 'Product Management, Agile',
+    skillsToLearn: 'Data Analysis, SQL',
+    bio: 'Product manager wanting to become more data-driven'
+  },
+  {
+    username: 'kyle',
+    name: 'Kyle Anderson',
+    phone: '444-555-6667',
+    age: 31,
+    city: 'Chicago',
+    skillsKnown: ' 3D Modeling, Blender',
+    skillsToLearn: 'Game Development, Unity',
+    bio: '3D artist interested in interactive media and game design'
+  },
+  {
+    username: 'luna',
+    name: 'Luna Garcia',
+    phone: '555-666-7778',
+    age: 25,
+    city: 'Mexico City',
+    skillsKnown: 'Social Media Marketing, Canva',
+    skillsToLearn: 'Advanced Photoshop, Brand Design',
+    bio: 'Social media manager looking to enhance visual design skills'
   }
 ];
 
 const mockCredentials = new Map([
   ['alice', 'alicepass'],
   ['bob', 'bobpass'],
-  ['charlie', 'charliepass']
+  ['charlie', 'charliepass'],
+  ['diana', 'dianapass'],
+  ['evan', 'evanpass'],
+  ['fiona', 'fionapass'],
+  ['george', 'georgepass'],
+  ['hannah', 'hannahpass'],
+  ['ivan', 'ivanpass'],
+  ['jade', 'jadepass'],
+  ['kyle', 'kylepass'],
+  ['luna', 'lunapass']
 ]);
 
 export const useAuthStore = create<AuthStore>()(
