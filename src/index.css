@@ -40,19 +40,12 @@ All colors MUST be HSL.
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -106,7 +99,7 @@ All colors MUST be HSL.
     overflow-x: hidden;
   }
 
-  /* Cool animated gradient background */
+  /* Enhanced animated gradient background */
   body::before {
     content: '';
     position: fixed;
@@ -114,20 +107,21 @@ All colors MUST be HSL.
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1;
+    z-index: -2;
     background: linear-gradient(-45deg, 
       hsl(240, 100%, 5%),     /* Deep dark blue */
       hsl(260, 100%, 8%),     /* Dark purple */
       hsl(280, 100%, 12%),    /* Purple */
-      hsl(220, 100%, 15%),    /* Blue */
+      hsl(320, 100%, 15%),    /* Magenta purple */
       hsl(200, 100%, 20%),    /* Cyan blue */
+      hsl(180, 100%, 25%),    /* Turquoise */
       hsl(240, 100%, 8%)      /* Back to dark purple */
     );
     background-size: 400% 400%;
-    animation: gradientShift 15s ease infinite;
+    animation: gradientShift 20s ease infinite;
   }
 
-  /* Animated floating orbs for extra visual interest */
+  /* Enhanced floating orbs with more variety */
   body::after {
     content: '';
     position: fixed;
@@ -137,20 +131,28 @@ All colors MUST be HSL.
     height: 100%;
     z-index: -1;
     background-image: 
-      radial-gradient(circle at 20% 50%, hsla(220, 100%, 50%, 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, hsla(280, 100%, 60%, 0.08) 0%, transparent 50%),
-      radial-gradient(circle at 40% 80%, hsla(200, 100%, 70%, 0.06) 0%, transparent 50%),
-      radial-gradient(circle at 90% 90%, hsla(260, 100%, 40%, 0.09) 0%, transparent 50%),
-      radial-gradient(circle at 10% 10%, hsla(240, 100%, 80%, 0.05) 0%, transparent 50%);
-    animation: floatingOrbs 20s ease-in-out infinite alternate;
+      radial-gradient(circle at 20% 50%, hsla(220, 100%, 50%, 0.15) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, hsla(280, 100%, 60%, 0.12) 0%, transparent 50%),
+      radial-gradient(circle at 40% 80%, hsla(200, 100%, 70%, 0.10) 0%, transparent 50%),
+      radial-gradient(circle at 90% 90%, hsla(260, 100%, 40%, 0.13) 0%, transparent 50%),
+      radial-gradient(circle at 10% 10%, hsla(240, 100%, 80%, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 70% 30%, hsla(320, 100%, 50%, 0.09) 0%, transparent 50%),
+      radial-gradient(circle at 30% 70%, hsla(180, 100%, 60%, 0.11) 0%, transparent 50%);
+    animation: floatingOrbs 25s ease-in-out infinite alternate;
   }
 
   @keyframes gradientShift {
     0% {
       background-position: 0% 50%;
     }
-    50% {
+    25% {
       background-position: 100% 50%;
+    }
+    50% {
+      background-position: 100% 100%;
+    }
+    75% {
+      background-position: 50% 100%;
     }
     100% {
       background-position: 0% 50%;
@@ -159,12 +161,24 @@ All colors MUST be HSL.
 
   @keyframes floatingOrbs {
     0% {
-      transform: translateY(0px) rotate(0deg);
+      transform: translateY(0px) rotate(0deg) scale(1);
       opacity: 0.7;
     }
-    100% {
-      transform: translateY(-20px) rotate(180deg);
+    25% {
+      transform: translateY(-15px) rotate(90deg) scale(1.1);
+      opacity: 0.8;
+    }
+    50% {
+      transform: translateY(-30px) rotate(180deg) scale(0.9);
       opacity: 0.9;
+    }
+    75% {
+      transform: translateY(-20px) rotate(270deg) scale(1.05);
+      opacity: 0.75;
+    }
+    100% {
+      transform: translateY(-10px) rotate(360deg) scale(1);
+      opacity: 0.8;
     }
   }
 
@@ -172,5 +186,62 @@ All colors MUST be HSL.
   #root {
     position: relative;
     z-index: 1;
+  }
+
+  /* Add interactive sparkle effects */
+  .sparkle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: hsl(220, 100%, 80%);
+    border-radius: 50%;
+    animation: sparkle 3s linear infinite;
+  }
+
+  @keyframes sparkle {
+    0% {
+      opacity: 0;
+      transform: scale(0) rotate(0deg);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1) rotate(180deg);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(0) rotate(360deg);
+    }
+  }
+
+  /* Enhanced hover effects for cards */
+  .hover-glow {
+    transition: all 0.3s ease;
+  }
+
+  .hover-glow:hover {
+    box-shadow: 0 0 30px hsla(220, 100%, 50%, 0.3);
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(240, 10%, 10%);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, hsl(220, 100%, 50%), hsl(280, 100%, 60%));
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, hsl(220, 100%, 60%), hsl(280, 100%, 70%));
   }
 }
