@@ -1,6 +1,7 @@
 
 export interface Review {
   id: string;
+  reviewerId: string;
   reviewerName: string;
   rating: number;
   comment: string;
@@ -33,6 +34,7 @@ mockCredentials.set('bob', 'bobpass');
 const sampleReviews: Review[] = [
   {
     id: '1',
+    reviewerId: 'john_smith',
     reviewerName: 'John Smith',
     rating: 5,
     comment: 'Excellent teacher! Very patient and knowledgeable.',
@@ -41,6 +43,7 @@ const sampleReviews: Review[] = [
   },
   {
     id: '2',
+    reviewerId: 'sarah_wilson',
     reviewerName: 'Sarah Wilson',
     rating: 4,
     comment: 'Great session, learned a lot about advanced concepts.',
@@ -49,6 +52,7 @@ const sampleReviews: Review[] = [
   },
   {
     id: '3',
+    reviewerId: 'mike_johnson',
     reviewerName: 'Mike Johnson',
     rating: 5,
     comment: 'Amazing designer! Helped me understand UI principles.',
