@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
@@ -23,6 +22,8 @@ interface ChatModalProps {
   recipient: {
     username: string;
     name?: string;
+    skillsKnown?: string;
+    skillsToLearn?: string;
   };
   currentUser: string;
 }
@@ -37,6 +38,70 @@ const ChatModal = ({ isOpen, onClose, recipient, currentUser }: ChatModalProps) 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { addReview, currentUser: currentUserData } = useAuthStore();
 
+  const generateContextualResponse = (userMessage: string) => {
+    const message = userMessage.toLowerCase();
+    const recipientSkills = recipient.skillsKnown?.toLowerCase() || '';
+    const recipientLearning = recipient.skillsToLearn?.toLowerCase() || '';
+    
+    // Skill-related responses
+    if (message.includes('teach') || message.includes('learn')) {
+      if (recipientSkills.includes('react') && message.includes('react')) {
+        return "I'd love to help you with React! I can teach you about components, hooks, state management, and best practices. When would you like to start?";
+      }
+      if (recipientSkills.includes('python') && message.includes('python')) {
+        return "Python is my specialty! I can help you with everything from basics to advanced topics like data science and web development. What's your current level?";
+      }
+      if (recipientSkills.includes('design') && (message.includes('design') || message.includes('ui') || message.includes('ux'))) {
+        return "I'm excited to share my design knowledge with you! We can cover UI/UX principles, design tools, and creating user-friendly interfaces. What aspect interests you most?";
+      }
+      if (recipientSkills.includes('photography') && message.includes('photo')) {
+        return "Photography is my passion! I can teach you about composition, lighting, editing, and different photography styles. Do you have a camera already?";
+      }
+      if (recipientSkills.includes('music') && (message.includes('music') || message.includes('guitar') || message.includes('piano'))) {
+        return "Music brings people together! I'd love to help you learn. We can start with basics and work our way up. What instrument or aspect of music interests you?";
+      }
+      return "I'm excited to share my knowledge with you! Based on my skills, I can help you with several areas. What would you like to focus on first?";
+    }
+
+    // Greeting responses
+    if (message.includes('hello') || message.includes('hi') || message.includes('hey')) {
+      return `Hello! Great to connect with you. I see you're interested in learning new skills - I'd be happy to help you with ${recipientSkills.split(',')[0] || 'various topics'}!`;
+    }
+
+    // Question responses
+    if (message.includes('how') || message.includes('what') || message.includes('when') || message.includes('where')) {
+      if (message.includes('experience')) {
+        return `I've been working in my field for several years and love sharing knowledge. My main expertise is in ${recipientSkills.split(',')[0] || 'various areas'}. What specific area would you like to know about?`;
+      }
+      if (message.includes('time') || message.includes('schedule')) {
+        return "I'm quite flexible with scheduling! We can arrange sessions that work for both of us. Would you prefer weekends or weekdays?";
+      }
+      if (message.includes('cost') || message.includes('price') || message.includes('free')) {
+        return "I believe in knowledge sharing! We can work out something that's fair for both of us. The most important thing is that you learn and grow.";
+      }
+      return "That's a great question! I'm here to help you succeed. What specific aspect would you like to dive deeper into?";
+    }
+
+    // Enthusiasm and agreement
+    if (message.includes('great') || message.includes('awesome') || message.includes('perfect') || message.includes('yes')) {
+      return "I'm glad you're excited! Learning new skills is always rewarding. Shall we set up our first session soon?";
+    }
+
+    // Default contextual responses
+    const responses = [
+      `That sounds interesting! Given my background in ${recipientSkills.split(',')[0] || 'various fields'}, I think we can work together well.`,
+      "I'm looking forward to helping you learn! My approach is hands-on and practical.",
+      `Based on what you're saying, I think my experience with ${recipientSkills.split(',')[0] || 'these topics'} would be really helpful for you.`,
+      "Let's make this learning journey exciting and productive!",
+      "I love connecting with people who are eager to learn new skills!",
+      "Your enthusiasm is contagious! I'm excited to share my knowledge with you.",
+      "Learning is a two-way street - I'm sure I'll learn something from you too!",
+      "I believe everyone has something valuable to teach. Let's explore what we can learn from each other!"
+    ];
+    
+    return responses[Math.floor(Math.random() * responses.length)];
+  };
+
   const sendMessage = () => {
     if (!newMessage.trim()) return;
     
@@ -49,25 +114,15 @@ const ChatModal = ({ isOpen, onClose, recipient, currentUser }: ChatModalProps) 
     };
     
     setMessages(prev => [...prev, message]);
+    const currentMessage = newMessage;
     setNewMessage('');
     
-    // Simulate recipient response after 1-3 seconds
+    // Generate contextual response after 1-3 seconds
     setTimeout(() => {
-      const responses = [
-        "That sounds great!",
-        "I'd love to help with that!",
-        "When would be a good time to start?",
-        "I'm excited to learn from you!",
-        "Let's schedule a session soon!",
-        "Thanks for connecting!",
-        "Looking forward to our skill exchange!",
-        "That's exactly what I was hoping to learn!"
-      ];
-      
       const response: Message = {
         id: (Date.now() + 1).toString(),
         sender: recipient.username,
-        content: responses[Math.floor(Math.random() * responses.length)],
+        content: generateContextualResponse(currentMessage),
         type: 'text',
         timestamp: new Date()
       };
@@ -190,6 +245,11 @@ const ChatModal = ({ isOpen, onClose, recipient, currentUser }: ChatModalProps) 
                 </div>
                 <p>Start a conversation with {recipient.name || recipient.username}!</p>
                 <p className="text-sm mt-2">Share skills, ask questions, and learn together</p>
+                {recipient.skillsKnown && (
+                  <p className="text-xs mt-2 text-blue-600">
+                    They know: {recipient.skillsKnown.split(',').slice(0, 3).join(', ')}
+                  </p>
+                )}
               </div>
             )}
             

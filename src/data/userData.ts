@@ -137,6 +137,724 @@ export const mockUsers: User[] = [
     totalReviews: 1
   },
   {
+    username: 'adrian_code',
+    name: 'Adrian Williams',
+    email: 'adrian@example.com',
+    age: 29,
+    city: 'Austin, TX',
+    phone: '+1 (555) 111-2222',
+    bio: 'Blockchain developer and cryptocurrency enthusiast. Building the future of finance!',
+    skillsKnown: 'Solidity, Web3, DeFi, Smart Contracts, Ethereum',
+    skillsToLearn: 'Layer 2 Solutions, Cross-chain Development, Rust',
+    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
+    reviews: [
+      {
+        id: '301',
+        reviewerId: 'crypto_dev',
+        reviewerName: 'Crypto Developer Sam',
+        rating: 5,
+        comment: 'Excellent smart contract security practices and DeFi knowledge.',
+        skillTaught: 'Smart Contract Development',
+        date: new Date('2024-01-15')
+      },
+      {
+        id: '302',
+        reviewerId: 'web3_expert',
+        reviewerName: 'Web3 Expert Maria',
+        rating: 4,
+        comment: 'Great introduction to blockchain fundamentals.',
+        skillTaught: 'Blockchain Basics',
+        date: new Date('2024-02-01')
+      }
+    ],
+    averageRating: 4.5,
+    totalReviews: 2
+  },
+  {
+    username: 'bella_art',
+    name: 'Bella Rodriguez',
+    email: 'bella@example.com',
+    age: 26,
+    city: 'Los Angeles, CA',
+    phone: '+1 (555) 222-3333',
+    bio: 'Digital artist specializing in NFT creation and generative art.',
+    skillsKnown: 'Digital Art, NFT Creation, Generative Art, Photoshop, Procreate',
+    skillsToLearn: 'AI Art, 3D Modeling, Animation',
+    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
+    reviews: [
+      {
+        id: '303',
+        reviewerId: 'art_collector',
+        reviewerName: 'Art Collector James',
+        rating: 5,
+        comment: 'Amazing NFT creation process and artistic vision.',
+        skillTaught: 'NFT Art Creation',
+        date: new Date('2024-01-20')
+      }
+    ],
+    averageRating: 5.0,
+    totalReviews: 1
+  },
+  {
+    username: 'carlos_chef',
+    name: 'Carlos Martinez',
+    email: 'carlos@example.com',
+    age: 34,
+    city: 'Miami, FL',
+    phone: '+1 (555) 333-4444',
+    bio: 'Professional chef and culinary instructor. Passionate about fusion cuisine!',
+    skillsKnown: 'Culinary Arts, Fusion Cuisine, Food Styling, Restaurant Management',
+    skillsToLearn: 'Food Photography, Nutrition Science, Molecular Gastronomy',
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
+    reviews: [
+      {
+        id: '304',
+        reviewerId: 'food_blogger',
+        reviewerName: 'Food Blogger Lisa',
+        rating: 5,
+        comment: 'Incredible cooking techniques and flavor combinations.',
+        skillTaught: 'Fusion Cooking',
+        date: new Date('2024-01-25')
+      },
+      {
+        id: '305',
+        reviewerId: 'culinary_student',
+        reviewerName: 'Culinary Student Mike',
+        rating: 4,
+        comment: 'Great knife skills and food presentation tips.',
+        skillTaught: 'Culinary Techniques',
+        date: new Date('2024-02-10')
+      }
+    ],
+    averageRating: 4.5,
+    totalReviews: 2
+  },
+  {
+    username: 'diana_fitness',
+    name: 'Diana Chen',
+    email: 'diana@example.com',
+    age: 28,
+    city: 'Seattle, WA',
+    phone: '+1 (555) 444-5555',
+    bio: 'Certified personal trainer and yoga instructor. Wellness is my passion!',
+    skillsKnown: 'Personal Training, Yoga, Pilates, Nutrition Coaching, Meditation',
+    skillsToLearn: 'Sports Psychology, Physiotherapy, Wellness Coaching',
+    avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612c7e9?w=150&h=150&fit=crop&crop=face',
+    reviews: [
+      {
+        id: '306',
+        reviewerId: 'fitness_enthusiast',
+        reviewerName: 'Fitness Enthusiast Tom',
+        rating: 5,
+        comment: 'Transformative fitness program and great motivation.',
+        skillTaught: 'Personal Training',
+        date: new Date('2024-01-30')
+      }
+    ],
+    averageRating: 5.0,
+    totalReviews: 1
+  },
+  {
+    username: 'ethan_music',
+    name: 'Ethan Taylor',
+    email: 'ethan@example.com',
+    age: 31,
+    city: 'Nashville, TN',
+    phone: '+1 (555) 555-6666',
+    bio: 'Music producer and sound engineer. Creating beats that move souls!',
+    skillsKnown: 'Music Production, Sound Engineering, Pro Tools, Ableton Live, Mixing',
+    skillsToLearn: 'Film Scoring, Mastering, Audio Programming',
+    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face',
+    reviews: [
+      {
+        id: '307',
+        reviewerId: 'musician',
+        reviewerName: 'Musician Sarah',
+        rating: 4,
+        comment: 'Excellent beat-making skills and music theory knowledge.',
+        skillTaught: 'Music Production',
+        date: new Date('2024-02-05')
+      }
+    ],
+    averageRating: 4.0,
+    totalReviews: 1
+  },
+  {
+    username: 'fiona_lang',
+    name: 'Fiona Anderson',
+    email: 'fiona@example.com',
+    age: 27,
+    city: 'Boston, MA',
+    phone: '+1 (555) 666-7777',
+    bio: 'Polyglot language teacher fluent in 7 languages. Love connecting cultures!',
+    skillsKnown: 'Language Teaching, Spanish, French, German, Italian, Mandarin, Japanese',
+    skillsToLearn: 'Arabic, Portuguese, Sign Language',
+    avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face',
+    reviews: [
+      {
+        id: '308',
+        reviewerId: 'language_learner',
+        reviewerName: 'Language Learner Alex',
+        rating: 5,
+        comment: 'Amazing teaching methods and cultural insights.',
+        skillTaught: 'Spanish Language',
+        date: new Date('2024-02-12')
+      }
+    ],
+    averageRating: 5.0,
+    totalReviews: 1
+  },
+  {
+    username: 'gabriel_photo',
+    name: 'Gabriel Wilson',
+    email: 'gabriel@example.com',
+    age: 30,
+    city: 'Denver, CO',
+    phone: '+1 (555) 777-8888',
+    bio: 'Wedding and portrait photographer with 10 years experience.',
+    skillsKnown: 'Photography, Wedding Photography, Portrait Photography, Lightroom, Photoshop',
+    skillsToLearn: 'Drone Photography, Film Photography, Studio Lighting',
+    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
+    reviews: [
+      {
+        id: '309',
+        reviewerId: 'bride',
+        reviewerName: 'Happy Bride Emma',
+        rating: 5,
+        comment: 'Captured our special day perfectly! Amazing eye for detail.',
+        skillTaught: 'Wedding Photography',
+        date: new Date('2024-01-18')
+      }
+    ],
+    averageRating: 5.0,
+    totalReviews: 1
+  },
+  {
+    username: 'hannah_garden',
+    name: 'Hannah Green',
+    email: 'hannah@example.com',
+    age: 29,
+    city: 'Portland, OR',
+    phone: '+1 (555) 888-9999',
+    bio: 'Urban gardening expert and sustainability advocate.',
+    skillsKnown: 'Urban Gardening, Sustainable Living, Permaculture, Composting, Hydroponics',
+    skillsToLearn: 'Aquaponics, Beekeeping, Renewable Energy',
+    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
+    reviews: [
+      {
+        id: '310',
+        reviewerId: 'gardener',
+        reviewerName: 'Home Gardener John',
+        rating: 4,
+        comment: 'Great tips for small space gardening and composting.',
+        skillTaught: 'Urban Gardening',
+        date: new Date('2024-02-08')
+      }
+    ],
+    averageRating: 4.0,
+    totalReviews: 1
+  },
+  {
+    username: 'ivan_game',
+    name: 'Ivan Petrov',
+    email: 'ivan@example.com',
+    age: 25,
+    city: 'Chicago, IL',
+    phone: '+1 (555) 999-0000',
+    bio: 'Indie game developer and pixel artist. Creating retro-style games!',
+    skillsKnown: 'Game Development, Pixel Art, Unity, C#, Game Design',
+    skillsToLearn: 'Unreal Engine, 3D Modeling, VR Development',
+    avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&h=150&fit=crop&crop=face',
+    reviews: [
+      {
+        id: '311',
+        reviewerId: 'gamer',
+        reviewerName: 'Gamer Lisa',
+        rating: 5,
+        comment: 'Loved the retro game development tutorial!',
+        skillTaught: 'Pixel Art',
+        date: new Date('2024-01-22')
+      }
+    ],
+    averageRating: 5.0,
+    totalReviews: 1
+  },
+  {
+    username: 'julia_dance',
+    name: 'Julia Santos',
+    email: 'julia@example.com',
+    age: 24,
+    city: 'Phoenix, AZ',
+    phone: '+1 (555) 000-1111',
+    bio: 'Professional dancer and choreographer specializing in Latin dance.',
+    skillsKnown: 'Salsa, Bachata, Merengue, Choreography, Dance Instruction',
+    skillsToLearn: 'Contemporary Dance, Hip Hop, Dance Therapy',
+    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face',
+    reviews: [
+      {
+        id: '312',
+        reviewerId: 'dance_student',
+        reviewerName: 'Dance Student Mark',
+        rating: 5,
+        comment: 'Amazing salsa instructor! So patient and encouraging.',
+        skillTaught: 'Salsa Dancing',
+        date: new Date('2024-02-15')
+      }
+    ],
+    averageRating: 5.0,
+    totalReviews: 1
+  },
+  {
+    username: 'kevin_crypto',
+    name: 'Kevin Chang',
+    email: 'kevin@example.com',
+    age: 32,
+    city: 'San Francisco, CA',
+    phone: '+1 (555) 111-2222',
+    bio: 'Cryptocurrency trader and DeFi protocol analyst.',
+    skillsKnown: 'Cryptocurrency Trading, DeFi Analysis, Technical Analysis, Portfolio Management',
+    skillsToLearn: 'Algorithmic Trading, Risk Management, Market Psychology',
+    avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&fit=crop&crop=face',
+    reviews: [
+      {
+        id: '313',
+        reviewerId: 'trader',
+        reviewerName: 'Crypto Trader Anna',
+        rating: 4,
+        comment: 'Great insights into DeFi protocols and trading strategies.',
+        skillTaught: 'Cryptocurrency Trading',
+        date: new Date('2024-01-28')
+      }
+    ],
+    averageRating: 4.0,
+    totalReviews: 1
+  },
+  {
+    username: 'laura_write',
+    name: 'Laura Mitchell',
+    email: 'laura@example.com',
+    age: 33,
+    city: 'Atlanta, GA',
+    phone: '+1 (555) 222-3333',
+    bio: 'Freelance writer and content creator. Words are my superpower!',
+    skillsKnown: 'Creative Writing, Content Marketing, Copywriting, Blogging, SEO Writing',
+    skillsToLearn: 'Screenwriting, Technical Writing, Grant Writing',
+    avatar: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop&crop=face',
+    reviews: [
+      {
+        id: '314',
+        reviewerId: 'business_owner',
+        reviewerName: 'Business Owner David',
+        rating: 5,
+        comment: 'Excellent copywriting skills and marketing knowledge.',
+        skillTaught: 'Copywriting',
+        date: new Date('2024-02-03')
+      }
+    ],
+    averageRating: 5.0,
+    totalReviews: 1
+  },
+  {
+    username: 'marcus_3d',
+    name: 'Marcus Johnson',
+    email: 'marcus@example.com',
+    age: 28,
+    city: 'Las Vegas, NV',
+    phone: '+1 (555) 333-4444',
+    bio: '3D artist and animator working in film and gaming industry.',
+    skillsKnown: '3D Modeling, Animation, Blender, Maya, ZBrush',
+    skillsToLearn: 'VFX, Motion Capture, Substance Painter',
+    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face',
+    reviews: [
+      {
+        id: '315',
+        reviewerId: 'animator',
+        reviewerName: 'Animator Sophie',
+        rating: 4,
+        comment: 'Great 3D modeling techniques and Blender tutorials.',
+        skillTaught: '3D Modeling',
+        date: new Date('2024-01-12')
+      }
+    ],
+    averageRating: 4.0,
+    totalReviews: 1
+  },
+  {
+    username: 'nina_psych',
+    name: 'Nina Thompson',
+    email: 'nina@example.com',
+    age: 35,
+    city: 'Minneapolis, MN',
+    phone: '+1 (555) 444-5555',
+    bio: 'Licensed therapist and mindfulness coach helping people find inner peace.',
+    skillsKnown: 'Psychology, Therapy, Mindfulness, Meditation, Stress Management',
+    skillsToLearn: 'Art Therapy, EMDR, Couples Counseling',
+    avatar: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=150&h=150&fit=crop&crop=face',
+    reviews: [
+      {
+        id: '316',
+        reviewerId: 'client',
+        reviewerName: 'Grateful Client',
+        rating: 5,
+        comment: 'Life-changing therapy sessions and mindfulness techniques.',
+        skillTaught: 'Mindfulness',
+        date: new Date('2024-02-20')
+      }
+    ],
+    averageRating: 5.0,
+    totalReviews: 1
+  },
+  {
+    username: 'oscar_brew',
+    name: 'Oscar Rodriguez',
+    email: 'oscar@example.com',
+    age: 31,
+    city: 'San Diego, CA',
+    phone: '+1 (555) 555-6666',
+    bio: 'Master brewer and beer enthusiast. Crafting perfect brews since 2015!',
+    skillsKnown: 'Beer Brewing, Fermentation, Recipe Development, Quality Control',
+    skillsToLearn: 'Distilling, Wine Making, Mead Production',
+    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
+    reviews: [
+      {
+        id: '317',
+        reviewerId: 'beer_lover',
+        reviewerName: 'Beer Enthusiast Mike',
+        rating: 5,
+        comment: 'Amazing homebrew techniques and beer knowledge.',
+        skillTaught: 'Beer Brewing',
+        date: new Date('2024-01-16')
+      }
+    ],
+    averageRating: 5.0,
+    totalReviews: 1
+  },
+  {
+    username: 'petra_yoga',
+    name: 'Petra Williams',
+    email: 'petra@example.com',
+    age: 29,
+    city: 'Boulder, CO',
+    phone: '+1 (555) 666-7777',
+    bio: 'Certified yoga instructor and wellness coach. Namaste!',
+    skillsKnown: 'Yoga, Meditation, Wellness Coaching, Breathwork, Ayurveda',
+    skillsToLearn: 'Pilates, Tai Chi, Massage Therapy',
+    avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face',
+    reviews: [
+      {
+        id: '318',
+        reviewerId: 'yoga_student',
+        reviewerName: 'Yoga Student Rachel',
+        rating: 4,
+        comment: 'Peaceful yoga sessions and great breathing techniques.',
+        skillTaught: 'Yoga',
+        date: new Date('2024-02-18')
+      }
+    ],
+    averageRating: 4.0,
+    totalReviews: 1
+  },
+  {
+    username: 'quentin_math',
+    name: 'Quentin Davis',
+    email: 'quentin@example.com',
+    age: 26,
+    city: 'Cambridge, MA',
+    phone: '+1 (555) 777-8888',
+    bio: 'Mathematics tutor and data science enthusiast. Making math fun!',
+    skillsKnown: 'Mathematics, Statistics, Data Science, Python, R',
+    skillsToLearn: 'Machine Learning, Deep Learning, Mathematical Modeling',
+    avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&h=150&fit=crop&crop=face',
+    reviews: [
+      {
+        id: '319',
+        reviewerId: 'math_student',
+        reviewerName: 'Math Student Jenny',
+        rating: 5,
+        comment: 'Made calculus finally make sense! Great teacher.',
+        skillTaught: 'Calculus',
+        date: new Date('2024-01-25')
+      }
+    ],
+    averageRating: 5.0,
+    totalReviews: 1
+  },
+  {
+    username: 'rebecca_fashion',
+    name: 'Rebecca Kim',
+    email: 'rebecca@example.com',
+    age: 27,
+    city: 'New York, NY',
+    phone: '+1 (555) 888-9999',
+    bio: 'Fashion designer and style consultant. Creating wearable art!',
+    skillsKnown: 'Fashion Design, Pattern Making, Styling, Textile Design, Sewing',
+    skillsToLearn: 'Sustainable Fashion, Digital Fashion, Fashion Marketing',
+    avatar: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=150&h=150&fit=crop&crop=face',
+    reviews: [
+      {
+        id: '320',
+        reviewerId: 'fashion_lover',
+        reviewerName: 'Fashion Lover Amy',
+        rating: 4,
+        comment: 'Great styling tips and pattern making techniques.',
+        skillTaught: 'Fashion Styling',
+        date: new Date('2024-02-10')
+      }
+    ],
+    averageRating: 4.0,
+    totalReviews: 1
+  },
+  {
+    username: 'samuel_wood',
+    name: 'Samuel Brown',
+    email: 'samuel@example.com',
+    age: 34,
+    city: 'Portland, ME',
+    phone: '+1 (555) 999-0000',
+    bio: 'Master carpenter and woodworking instructor. Crafting with passion!',
+    skillsKnown: 'Woodworking, Carpentry, Furniture Making, Wood Carving, Tool Maintenance',
+    skillsToLearn: 'CNC Machining, Joinery, Restoration',
+    avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face',
+    reviews: [
+      {
+        id: '321',
+        reviewerId: 'woodworker',
+        reviewerName: 'Woodworker Tom',
+        rating: 5,
+        comment: 'Excellent craftsmanship and detailed instruction.',
+        skillTaught: 'Woodworking',
+        date: new Date('2024-01-30')
+      }
+    ],
+    averageRating: 5.0,
+    totalReviews: 1
+  },
+  {
+    username: 'tara_voice',
+    name: 'Tara Wilson',
+    email: 'tara@example.com',
+    age: 30,
+    city: 'Nashville, TN',
+    phone: '+1 (555) 000-1111',
+    bio: 'Voice coach and singing instructor. Helping voices soar!',
+    skillsKnown: 'Voice Coaching, Singing, Vocal Technique, Performance, Music Theory',
+    skillsToLearn: 'Voice Acting, Opera, Songwriting',
+    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
+    reviews: [
+      {
+        id: '322',
+        reviewerId: 'singer',
+        reviewerName: 'Aspiring Singer Jake',
+        rating: 5,
+        comment: 'Amazing vocal techniques and performance tips.',
+        skillTaught: 'Voice Training',
+        date: new Date('2024-02-14')
+      }
+    ],
+    averageRating: 5.0,
+    totalReviews: 1
+  },
+  {
+    username: 'ulysses_astro',
+    name: 'Ulysses Garcia',
+    email: 'ulysses@example.com',
+    age: 32,
+    city: 'Tucson, AZ',
+    phone: '+1 (555) 111-2222',
+    bio: 'Astronomer and astrophotographer. Exploring the cosmos!',
+    skillsKnown: 'Astronomy, Astrophotography, Telescope Use, Celestial Navigation',
+    skillsToLearn: 'Radio Astronomy, Spectroscopy, Planetary Science',
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
+    reviews: [
+      {
+        id: '323',
+        reviewerId: 'stargazer',
+        reviewerName: 'Stargazer Maria',
+        rating: 4,
+        comment: 'Incredible night sky photography and astronomy knowledge.',
+        skillTaught: 'Astrophotography',
+        date: new Date('2024-01-20')
+      }
+    ],
+    averageRating: 4.0,
+    totalReviews: 1
+  },
+  {
+    username: 'vera_herbs',
+    name: 'Vera Martinez',
+    email: 'vera@example.com',
+    age: 28,
+    city: 'Santa Fe, NM',
+    phone: '+1 (555) 222-3333',
+    bio: 'Herbalist and natural medicine practitioner. Healing with nature!',
+    skillsKnown: 'Herbalism, Natural Medicine, Essential Oils, Plant Identification',
+    skillsToLearn: 'Aromatherapy, Homeopathy, Traditional Chinese Medicine',
+    avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612c7e9?w=150&h=150&fit=crop&crop=face',
+    reviews: [
+      {
+        id: '324',
+        reviewerId: 'natural_healer',
+        reviewerName: 'Natural Healer Lisa',
+        rating: 5,
+        comment: 'Wonderful herbal remedies and plant knowledge.',
+        skillTaught: 'Herbalism',
+        date: new Date('2024-02-05')
+      }
+    ],
+    averageRating: 5.0,
+    totalReviews: 1
+  },
+  {
+    username: 'walter_magic',
+    name: 'Walter Thompson',
+    email: 'walter@example.com',
+    age: 35,
+    city: 'Las Vegas, NV',
+    phone: '+1 (555) 333-4444',
+    bio: 'Professional magician and entertainer. Making magic happen!',
+    skillsKnown: 'Magic, Illusion, Card Tricks, Stage Performance, Entertainment',
+    skillsToLearn: 'Mentalism, Escape Artistry, Comedy',
+    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face',
+    reviews: [
+      {
+        id: '325',
+        reviewerId: 'magic_fan',
+        reviewerName: 'Magic Fan Sarah',
+        rating: 5,
+        comment: 'Mind-blowing card tricks and stage presence!',
+        skillTaught: 'Card Magic',
+        date: new Date('2024-01-18')
+      }
+    ],
+    averageRating: 5.0,
+    totalReviews: 1
+  },
+  {
+    username: 'xara_pottery',
+    name: 'Xara Patel',
+    email: 'xara@example.com',
+    age: 26,
+    city: 'Asheville, NC',
+    phone: '+1 (555) 444-5555',
+    bio: 'Ceramic artist and pottery instructor. Shaping clay, shaping lives!',
+    skillsKnown: 'Pottery, Ceramics, Wheel Throwing, Glazing, Kiln Firing',
+    skillsToLearn: 'Sculpture, Raku Firing, Ceramic Repair',
+    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face',
+    reviews: [
+      {
+        id: '326',
+        reviewerId: 'pottery_student',
+        reviewerName: 'Pottery Student Mark',
+        rating: 4,
+        comment: 'Great wheel throwing techniques and patience.',
+        skillTaught: 'Pottery',
+        date: new Date('2024-02-12')
+      }
+    ],
+    averageRating: 4.0,
+    totalReviews: 1
+  },
+  {
+    username: 'yuki_anime',
+    name: 'Yuki Tanaka',
+    email: 'yuki@example.com',
+    age: 24,
+    city: 'San Francisco, CA',
+    phone: '+1 (555) 555-6666',
+    bio: 'Anime artist and manga illustrator. Bringing stories to life!',
+    skillsKnown: 'Anime Art, Manga Illustration, Character Design, Digital Art',
+    skillsToLearn: 'Animation, Storyboarding, Comic Publishing',
+    avatar: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=150&h=150&fit=crop&crop=face',
+    reviews: [
+      {
+        id: '327',
+        reviewerId: 'anime_fan',
+        reviewerName: 'Anime Fan Alex',
+        rating: 5,
+        comment: 'Amazing character designs and drawing techniques!',
+        skillTaught: 'Anime Drawing',
+        date: new Date('2024-01-28')
+      }
+    ],
+    averageRating: 5.0,
+    totalReviews: 1
+  },
+  {
+    username: 'zach_climb',
+    name: 'Zach Williams',
+    email: 'zach@example.com',
+    age: 29,
+    city: 'Boulder, CO',
+    phone: '+1 (555) 666-7777',
+    bio: 'Rock climbing instructor and outdoor adventure guide.',
+    skillsKnown: 'Rock Climbing, Mountaineering, Outdoor Safety, Rescue Techniques',
+    skillsToLearn: 'Ice Climbing, Canyoneering, Wilderness First Aid',
+    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
+    reviews: [
+      {
+        id: '328',
+        reviewerId: 'climber',
+        reviewerName: 'Climber Emma',
+        rating: 5,
+        comment: 'Excellent safety instruction and climbing techniques.',
+        skillTaught: 'Rock Climbing',
+        date: new Date('2024-02-08')
+      }
+    ],
+    averageRating: 5.0,
+    totalReviews: 1
+  },
+  {
+    username: 'aria_violin',
+    name: 'Aria Johnson',
+    email: 'aria@example.com',
+    age: 25,
+    city: 'Philadelphia, PA',
+    phone: '+1 (555) 777-8888',
+    bio: 'Classical violinist and music teacher. Music is the universal language!',
+    skillsKnown: 'Violin, Classical Music, Music Theory, Orchestra, Performance',
+    skillsToLearn: 'Jazz Violin, Electric Violin, Composition',
+    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
+    reviews: [
+      {
+        id: '329',
+        reviewerId: 'violin_student',
+        reviewerName: 'Violin Student David',
+        rating: 4,
+        comment: 'Beautiful technique and patient instruction.',
+        skillTaught: 'Violin',
+        date: new Date('2024-01-15')
+      }
+    ],
+    averageRating: 4.0,
+    totalReviews: 1
+  },
+  {
+    username: 'blake_surf',
+    name: 'Blake Anderson',
+    email: 'blake@example.com',
+    age: 27,
+    city: 'Honolulu, HI',
+    phone: '+1 (555) 888-9999',
+    bio: 'Professional surfer and ocean safety instructor. Riding waves since childhood!',
+    skillsKnown: 'Surfing, Ocean Safety, Swimming, Water Rescue, Surf Coaching',
+    skillsToLearn: 'Stand-up Paddleboarding, Kitesurfing, Marine Biology',
+    avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&h=150&fit=crop&crop=face',
+    reviews: [
+      {
+        id: '330',
+        reviewerId: 'surfer',
+        reviewerName: 'Surfer Lisa',
+        rating: 5,
+        comment: 'Amazing surf coaching and ocean knowledge!',
+        skillTaught: 'Surfing',
+        date: new Date('2024-02-01')
+      }
+    ],
+    averageRating: 5.0,
+    totalReviews: 1
+  },
+  {
     username: 'charlie',
     name: 'Charlie Brown',
     email: 'charlie@example.com',
@@ -970,7 +1688,6 @@ export const mockUsers: User[] = [
     averageRating: 0,
     totalReviews: 0
   },
-  // Adding 30 more diverse profiles with skills and reviews
   {
     username: 'sophia',
     name: 'Sophia Wang',
