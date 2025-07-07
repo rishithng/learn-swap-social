@@ -1,4 +1,5 @@
 
+
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { User, Review, mockUsers, mockCredentials } from '@/data/userData';
@@ -26,6 +27,17 @@ const saveCredentialsToStorage = (username: string, password: string) => {
   }
 };
 
+// Function to save user data to localStorage
+const saveUserToStorage = (user: User) => {
+  try {
+    const existingUsers = JSON.parse(localStorage.getItem('skillswap-users') || '[]');
+    const updatedUsers = [...existingUsers, user];
+    localStorage.setItem('skillswap-users', JSON.stringify(updatedUsers));
+  } catch (error) {
+    console.error('Error saving user data:', error);
+  }
+};
+
 // Function to load credentials from localStorage
 const loadCredentialsFromStorage = () => {
   try {
@@ -41,15 +53,32 @@ const loadCredentialsFromStorage = () => {
   }
 };
 
-// Load existing credentials on initialization
+// Function to load users from localStorage
+const loadUsersFromStorage = () => {
+  try {
+    const stored = localStorage.getItem('skillswap-users');
+    if (stored) {
+      const users = JSON.parse(stored);
+      return users;
+    }
+    return [];
+  } catch (error) {
+    console.error('Error loading users:', error);
+    return [];
+  }
+};
+
+// Load existing credentials and users on initialization
 loadCredentialsFromStorage();
+const storedUsers = loadUsersFromStorage();
+const allUsers = [...mockUsers, ...storedUsers];
 
 export const useAuthStore = create<AuthStore>()(
   persist(
     (set, get) => ({
       isAuthenticated: false,
       currentUser: null,
-      users: mockUsers,
+      users: allUsers,
       
       login: (username: string, password: string) => {
         console.log('Attempting login for:', username);
@@ -82,10 +111,19 @@ export const useAuthStore = create<AuthStore>()(
         
         const newUser: User = { 
           username, 
+          name: username,
+          email: `${username}@example.com`,
           reviews: [], 
           averageRating: 0, 
-          totalReviews: 0 
+          totalReviews: 0,
+          avatar: `https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face`,
+          bio: `Hi! I'm ${username}. I'm excited to learn and share skills with the community!`,
+          skillsKnown: 'Add your skills here',
+          skillsToLearn: 'Add skills you want to learn here'
         };
+        
+        // Save user data to localStorage
+        saveUserToStorage(newUser);
         
         set(state => ({
           users: [...state.users, newUser],
@@ -160,3 +198,4 @@ export const useAuthStore = create<AuthStore>()(
 );
 
 export type { User, Review };
+
