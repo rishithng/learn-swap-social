@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { useAuthStore } from '@/store/authStore';
-import { MapPin, Phone, Calendar, MessageCircle, Star, Heart, Zap } from 'lucide-react';
+import { MapPin, Phone, Calendar, MessageCircle, Star, Heart, Zap, Quote } from 'lucide-react';
 import { toast } from 'sonner';
 import ChatModal from './ChatModal';
 import SkillSearch from './SkillSearch';
@@ -82,7 +82,7 @@ const BrowseProfiles = () => {
           <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
             Discover Skill Swappers
           </h2>
-          <p className="text-gray-600">Connect with amazing people and expand your skillset</p>
+          <p className="text-gray-600 dark:text-gray-300">Connect with amazing people and expand your skillset</p>
         </div>
 
         <div className="flex flex-col space-y-4">
@@ -116,7 +116,7 @@ const BrowseProfiles = () => {
             <div className="w-24 h-24 bg-gradient-to-br from-blue-100 to-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <Star className="w-12 h-12 text-blue-600" />
             </div>
-            <h3 className="text-lg font-medium text-gray-900 mb-2">
+            <h3 className="text-lg font-medium text-gray-900 dark:text-gray-200 mb-2">
               {searchTerm ? 'No matching profiles found' : 'No other users yet'}
             </h3>
             <p className="text-gray-500">
@@ -126,9 +126,9 @@ const BrowseProfiles = () => {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {displayedUsers.map(({ user, score, matchReasons }) => (
-              <Card key={user.username} className="hover:shadow-xl transition-all duration-500 border-0 shadow-lg bg-white/90 backdrop-blur-sm hover:bg-white hover:transform hover:-translate-y-2 hover:scale-105 group relative overflow-hidden">
+              <Card key={user.username} className="hover-lift profile-glow hover:shadow-xl transition-all duration-500 border-0 shadow-lg bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm hover:bg-white dark:hover:bg-gray-800 group relative overflow-hidden">
                 {viewMode === 'recommended' && score > 0 && (
-                  <div className="absolute top-2 right-2 bg-gradient-to-r from-orange-400 to-red-500 text-white text-xs px-2 py-1 rounded-full flex items-center space-x-1">
+                  <div className="absolute top-2 right-2 bg-gradient-to-r from-orange-400 to-red-500 text-white text-xs px-2 py-1 rounded-full flex items-center space-x-1 z-10">
                     <Zap className="w-3 h-3" />
                     <span>{score}% Match</span>
                   </div>
@@ -137,17 +137,17 @@ const BrowseProfiles = () => {
                 <CardHeader className="pb-3">
                   <div className="flex items-start justify-between">
                     <div className="flex items-center space-x-3 flex-1">
-                      <Avatar className="w-12 h-12 border-2 border-blue-200">
+                      <Avatar className="w-12 h-12 border-2 border-blue-200 avatar-pulse">
                         <AvatarImage src={user.avatar} alt={user.name || user.username} />
                         <AvatarFallback className="bg-gradient-to-br from-blue-400 to-purple-500 text-white font-bold">
                           {(user.name || user.username).charAt(0).toUpperCase()}
                         </AvatarFallback>
                       </Avatar>
                       <div className="flex-1">
-                        <CardTitle className="text-lg text-gray-900 mb-1 group-hover:text-blue-600 transition-colors">
+                        <CardTitle className="text-lg text-gray-900 dark:text-gray-100 mb-1 group-hover:text-blue-600 transition-colors">
                           {user.name || user.username}
                         </CardTitle>
-                        <CardDescription className="text-gray-500">
+                        <CardDescription className="text-gray-500 dark:text-gray-400">
                           @{user.username}
                         </CardDescription>
                         {user.totalReviews > 0 && (
@@ -167,35 +167,35 @@ const BrowseProfiles = () => {
                 
                 <CardContent className="space-y-4">
                   {user.bio && (
-                    <p className="text-sm text-gray-600 italic bg-gray-50 p-3 rounded-lg">{user.bio}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-300 italic bg-gray-50 dark:bg-gray-700/50 p-3 rounded-lg">{user.bio}</p>
                   )}
 
                   {viewMode === 'recommended' && matchReasons.length > 0 && (
-                    <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-3 rounded-lg">
-                      <h5 className="text-xs font-semibold text-blue-700 mb-1">Why this match:</h5>
+                    <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 p-3 rounded-lg">
+                      <h5 className="text-xs font-semibold text-blue-700 dark:text-blue-300 mb-1">Why this match:</h5>
                       {matchReasons.slice(0, 2).map((reason, index) => (
-                        <p key={index} className="text-xs text-blue-600">• {reason}</p>
+                        <p key={index} className="text-xs text-blue-600 dark:text-blue-400">• {reason}</p>
                       ))}
                     </div>
                   )}
                   
                   <div className="space-y-2 text-sm">
                     {user.city && (
-                      <div className="flex items-center text-gray-600">
+                      <div className="flex items-center text-gray-600 dark:text-gray-400">
                         <MapPin className="w-4 h-4 mr-2 text-blue-500" />
                         <span>{user.city}</span>
                       </div>
                     )}
                     
                     {user.age && (
-                      <div className="flex items-center text-gray-600">
+                      <div className="flex items-center text-gray-600 dark:text-gray-400">
                         <Calendar className="w-4 h-4 mr-2 text-green-500" />
                         <span>{user.age} years old</span>
                       </div>
                     )}
                     
                     {user.phone && (
-                      <div className="flex items-center text-gray-600">
+                      <div className="flex items-center text-gray-600 dark:text-gray-400">
                         <Phone className="w-4 h-4 mr-2 text-purple-500" />
                         <span>{user.phone}</span>
                       </div>
@@ -204,7 +204,7 @@ const BrowseProfiles = () => {
 
                   {user.skillsKnown && (
                     <div className="space-y-2">
-                      <h4 className="font-medium text-gray-900 text-sm">Can teach:</h4>
+                      <h4 className="font-medium text-gray-900 dark:text-gray-200 text-sm">Can teach:</h4>
                       <div className="flex flex-wrap gap-1">
                         {parseSkills(user.skillsKnown).slice(0, 3).map((skill, index) => (
                           <Badge key={index} className="text-xs bg-green-100 text-green-700 hover:bg-green-200 transition-colors">
@@ -222,7 +222,7 @@ const BrowseProfiles = () => {
 
                   {user.skillsToLearn && (
                     <div className="space-y-2">
-                      <h4 className="font-medium text-gray-900 text-sm">Wants to learn:</h4>
+                      <h4 className="font-medium text-gray-900 dark:text-gray-200 text-sm">Wants to learn:</h4>
                       <div className="flex flex-wrap gap-1">
                         {parseSkills(user.skillsToLearn).slice(0, 3).map((skill, index) => (
                           <Badge key={index} variant="outline" className="text-xs border-blue-200 text-blue-700 hover:bg-blue-50 transition-colors">
@@ -240,17 +240,27 @@ const BrowseProfiles = () => {
 
                   {user.reviews && user.reviews.length > 0 && (
                     <div className="space-y-2">
-                      <h4 className="font-medium text-gray-900 text-sm">Recent Review:</h4>
-                      <div className="bg-yellow-50 p-2 rounded-lg border border-yellow-200">
-                        <div className="flex items-center space-x-1 mb-1">
-                          {renderStars(user.reviews[user.reviews.length - 1].rating)}
-                          <span className="text-xs text-gray-600">
-                            - {user.reviews[user.reviews.length - 1].reviewerName}
-                          </span>
-                        </div>
-                        <p className="text-xs text-gray-700 italic">
-                          "{user.reviews[user.reviews.length - 1].comment.substring(0, 60)}..."
-                        </p>
+                      <h4 className="font-medium text-gray-900 dark:text-gray-200 text-sm flex items-center">
+                        <Quote className="w-3 h-3 mr-1" />
+                        Recent Reviews:
+                      </h4>
+                      <div className="space-y-2 max-h-32 overflow-y-auto">
+                        {user.reviews.slice(-2).map((review, index) => (
+                          <div key={review.id} className="bg-yellow-50 dark:bg-yellow-900/20 p-2 rounded-lg border border-yellow-200 dark:border-yellow-700">
+                            <div className="flex items-center space-x-1 mb-1">
+                              {renderStars(review.rating)}
+                              <span className="text-xs text-gray-600 dark:text-gray-400">
+                                - {review.reviewerName}
+                              </span>
+                            </div>
+                            <p className="text-xs text-gray-700 dark:text-gray-300 italic">
+                              "{review.comment.length > 80 ? review.comment.substring(0, 80) + '...' : review.comment}"
+                            </p>
+                            <p className="text-xs text-blue-600 dark:text-blue-400 mt-1">
+                              Skill: {review.skillTaught}
+                            </p>
+                          </div>
+                        ))}
                       </div>
                     </div>
                   )}
