@@ -36,15 +36,22 @@ const ReviewModal = ({ isOpen, onClose, recipientName, onSubmitReview }: ReviewM
       return;
     }
 
-    onSubmitReview(rating, comment.trim(), skillTaught.trim());
+    console.log('Submitting review:', { rating, comment: comment.trim(), skillTaught: skillTaught.trim() });
     
-    // Reset form
-    setRating(0);
-    setComment('');
-    setSkillTaught('');
-    onClose();
-    
-    toast.success('Review submitted successfully!');
+    try {
+      onSubmitReview(rating, comment.trim(), skillTaught.trim());
+      
+      // Reset form
+      setRating(0);
+      setComment('');
+      setSkillTaught('');
+      onClose();
+      
+      toast.success('Review submitted successfully!');
+    } catch (error) {
+      console.error('Error submitting review:', error);
+      toast.error('Failed to submit review. Please try again.');
+    }
   };
 
   const handleClose = () => {
@@ -56,16 +63,16 @@ const ReviewModal = ({ isOpen, onClose, recipientName, onSubmitReview }: ReviewM
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="max-w-md bg-white/95 backdrop-blur-sm">
+      <DialogContent className="max-w-md bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm">
         <DialogHeader>
-          <DialogTitle className="text-center">
+          <DialogTitle className="text-center text-gray-900 dark:text-gray-100">
             Rate your experience with {recipientName}
           </DialogTitle>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="text-center">
-            <p className="text-sm text-gray-600 mb-4">How was your learning experience?</p>
+            <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">How was your learning experience?</p>
             <div className="flex justify-center space-x-1">
               {[1, 2, 3, 4, 5].map((star) => (
                 <button
@@ -89,7 +96,7 @@ const ReviewModal = ({ isOpen, onClose, recipientName, onSubmitReview }: ReviewM
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               What skill did they teach you? *
             </label>
             <Input
@@ -97,11 +104,12 @@ const ReviewModal = ({ isOpen, onClose, recipientName, onSubmitReview }: ReviewM
               onChange={(e) => setSkillTaught(e.target.value)}
               placeholder="e.g., Python, Web Development, Design"
               required
+              className="dark:bg-gray-700 dark:text-white"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Write your review *
             </label>
             <Textarea
@@ -109,7 +117,7 @@ const ReviewModal = ({ isOpen, onClose, recipientName, onSubmitReview }: ReviewM
               onChange={(e) => setComment(e.target.value)}
               placeholder="Share your experience..."
               rows={4}
-              className="resize-none focus:ring-2 focus:ring-blue-500"
+              className="resize-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
               required
             />
           </div>

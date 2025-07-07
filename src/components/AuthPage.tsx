@@ -21,7 +21,7 @@ const AuthPage = () => {
     if (login(loginData.username, loginData.password)) {
       toast.success('Welcome back!');
     } else {
-      toast.error('Invalid credentials. Try alice/alicepass or bob/bobpass');
+      toast.error('Invalid credentials');
     }
   };
 
@@ -32,7 +32,9 @@ const AuthPage = () => {
       return;
     }
     if (register(registerData.username, registerData.password)) {
-      toast.success('Account created successfully!');
+      toast.success('Account created successfully! Please login with your credentials.');
+      // Reset form
+      setRegisterData({ username: '', password: '', confirmPassword: '' });
     } else {
       toast.error('Username already exists');
     }
