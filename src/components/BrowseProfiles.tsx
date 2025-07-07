@@ -4,8 +4,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { useAuthStore } from '@/store/authStore';
-import { MapPin, Phone, Calendar, MessageCircle, Star, Heart, Zap, Quote } from 'lucide-react';
+import { MapPin, Phone, Calendar, MessageCircle, Star, Heart, Zap, Quote, Users } from 'lucide-react';
 import { toast } from 'sonner';
 import ChatModal from './ChatModal';
 import SkillSearch from './SkillSearch';
@@ -17,7 +18,7 @@ const BrowseProfiles = () => {
   const [selectedUser, setSelectedUser] = useState<any>(null);
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
-  const [viewMode, setViewMode] = useState<'recommended' | 'all' | 'search'>('recommended');
+  const [viewMode, setViewMode] = useState<'recommended' | 'all' | 'search'>('all');
 
   const displayedUsers = useMemo(() => {
     if (!currentUser) return [];
@@ -54,7 +55,7 @@ const BrowseProfiles = () => {
 
   const handleSearch = (term: string) => {
     setSearchTerm(term);
-    setViewMode(term ? 'search' : 'recommended');
+    setViewMode(term ? 'search' : 'all');
   };
 
   const parseSkills = (skills: string | undefined) => {
@@ -75,6 +76,13 @@ const BrowseProfiles = () => {
     ));
   };
 
+  // Group users into chunks for carousel slides
+  const groupedUsers = [];
+  const usersPerSlide = 6; // 2 rows x 3 columns
+  for (let i = 0; i < displayedUsers.length; i += usersPerSlide) {
+    groupedUsers.push(displayedUsers.slice(i, i + usersPerSlide));
+  }
+
   return (
     <>
       <div className="space-y-6">
@@ -82,7 +90,11 @@ const BrowseProfiles = () => {
           <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
             Discover Skill Swappers
           </h2>
-          <p className="text-gray-600 dark:text-gray-300">Connect with amazing people and expand your skillset</p>
+          <p className="text-gray-600 dark:text-gray-300 mb-2">Connect with amazing people and expand your skillset</p>
+          <div className="flex items-center justify-center space-x-2 text-sm text-blue-600 dark:text-blue-400">
+            <Users className="w-4 h-4" />
+            <span>{displayedUsers.length} talented people ready to share skills</span>
+          </div>
         </div>
 
         <div className="flex flex-col space-y-4">
@@ -106,7 +118,7 @@ const BrowseProfiles = () => {
               variant={viewMode === 'all' ? 'default' : 'outline'}
               size="sm"
             >
-              All Profiles
+              All Profiles ({allUsers.length})
             </Button>
           </div>
         </div>
@@ -124,160 +136,184 @@ const BrowseProfiles = () => {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {displayedUsers.map(({ user, score, matchReasons }) => (
-              <Card key={user.username} className="hover-lift profile-glow hover:shadow-xl transition-all duration-500 border-0 shadow-lg bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm hover:bg-white dark:hover:bg-gray-800 group relative overflow-hidden">
-                {viewMode === 'recommended' && score > 0 && (
-                  <div className="absolute top-2 right-2 bg-gradient-to-r from-orange-400 to-red-500 text-white text-xs px-2 py-1 rounded-full flex items-center space-x-1 z-10">
-                    <Zap className="w-3 h-3" />
-                    <span>{score}% Match</span>
-                  </div>
-                )}
-
-                <CardHeader className="pb-3">
-                  <div className="flex items-start justify-between">
-                    <div className="flex items-center space-x-3 flex-1">
-                      <Avatar className="w-12 h-12 border-2 border-blue-200 avatar-pulse">
-                        <AvatarImage src={user.avatar} alt={user.name || user.username} />
-                        <AvatarFallback className="bg-gradient-to-br from-blue-400 to-purple-500 text-white font-bold">
-                          {(user.name || user.username).charAt(0).toUpperCase()}
-                        </AvatarFallback>
-                      </Avatar>
-                      <div className="flex-1">
-                        <CardTitle className="text-lg text-gray-900 dark:text-gray-100 mb-1 group-hover:text-blue-600 transition-colors">
-                          {user.name || user.username}
-                        </CardTitle>
-                        <CardDescription className="text-gray-500 dark:text-gray-400">
-                          @{user.username}
-                        </CardDescription>
-                        {user.totalReviews > 0 && (
-                          <div className="flex items-center space-x-1 mt-1">
-                            <div className="flex">
-                              {renderStars(user.averageRating)}
+          <div className="relative">
+            <Carousel
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              className="w-full"
+            >
+              <CarouselContent className="-ml-2 md:-ml-4">
+                {groupedUsers.map((userGroup, groupIndex) => (
+                  <CarouselItem key={groupIndex} className="pl-2 md:pl-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                      {userGroup.map(({ user, score, matchReasons }) => (
+                        <Card key={user.username} className="hover-lift profile-glow hover:shadow-xl transition-all duration-500 border-0 shadow-lg bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm hover:bg-white dark:hover:bg-gray-800 group relative overflow-hidden animate-fade-in">
+                          {viewMode === 'recommended' && score > 0 && (
+                            <div className="absolute top-2 right-2 bg-gradient-to-r from-orange-400 to-red-500 text-white text-xs px-2 py-1 rounded-full flex items-center space-x-1 z-10">
+                              <Zap className="w-3 h-3" />
+                              <span>{score}% Match</span>
                             </div>
-                            <span className="text-xs text-gray-500">
-                              ({user.totalReviews} review{user.totalReviews !== 1 ? 's' : ''})
-                            </span>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </CardHeader>
-                
-                <CardContent className="space-y-4">
-                  {user.bio && (
-                    <p className="text-sm text-gray-600 dark:text-gray-300 italic bg-gray-50 dark:bg-gray-700/50 p-3 rounded-lg">{user.bio}</p>
-                  )}
+                          )}
 
-                  {viewMode === 'recommended' && matchReasons.length > 0 && (
-                    <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 p-3 rounded-lg">
-                      <h5 className="text-xs font-semibold text-blue-700 dark:text-blue-300 mb-1">Why this match:</h5>
-                      {matchReasons.slice(0, 2).map((reason, index) => (
-                        <p key={index} className="text-xs text-blue-600 dark:text-blue-400">• {reason}</p>
+                          <CardHeader className="pb-3">
+                            <div className="flex items-start justify-between">
+                              <div className="flex items-center space-x-3 flex-1">
+                                <Avatar className="w-12 h-12 border-2 border-blue-200 avatar-pulse">
+                                  <AvatarImage src={user.avatar} alt={user.name || user.username} />
+                                  <AvatarFallback className="bg-gradient-to-br from-blue-400 to-purple-500 text-white font-bold">
+                                    {(user.name || user.username).charAt(0).toUpperCase()}
+                                  </AvatarFallback>
+                                </Avatar>
+                                <div className="flex-1">
+                                  <CardTitle className="text-lg text-gray-900 dark:text-gray-100 mb-1 group-hover:text-blue-600 transition-colors">
+                                    {user.name || user.username}
+                                  </CardTitle>
+                                  <CardDescription className="text-gray-500 dark:text-gray-400">
+                                    @{user.username}
+                                  </CardDescription>
+                                  {user.totalReviews > 0 && (
+                                    <div className="flex items-center space-x-1 mt-1">
+                                      <div className="flex">
+                                        {renderStars(user.averageRating)}
+                                      </div>
+                                      <span className="text-xs text-gray-500">
+                                        ({user.totalReviews} review{user.totalReviews !== 1 ? 's' : ''})
+                                      </span>
+                                    </div>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                          </CardHeader>
+                          
+                          <CardContent className="space-y-4">
+                            {user.bio && (
+                              <p className="text-sm text-gray-600 dark:text-gray-300 italic bg-gray-50 dark:bg-gray-700/50 p-3 rounded-lg">{user.bio}</p>
+                            )}
+
+                            {viewMode === 'recommended' && matchReasons.length > 0 && (
+                              <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 p-3 rounded-lg">
+                                <h5 className="text-xs font-semibold text-blue-700 dark:text-blue-300 mb-1">Why this match:</h5>
+                                {matchReasons.slice(0, 2).map((reason, index) => (
+                                  <p key={index} className="text-xs text-blue-600 dark:text-blue-400">• {reason}</p>
+                                ))}
+                              </div>
+                            )}
+                            
+                            <div className="space-y-2 text-sm">
+                              {user.city && (
+                                <div className="flex items-center text-gray-600 dark:text-gray-400">
+                                  <MapPin className="w-4 h-4 mr-2 text-blue-500" />
+                                  <span>{user.city}</span>
+                                </div>
+                              )}
+                              
+                              {user.age && (
+                                <div className="flex items-center text-gray-600 dark:text-gray-400">
+                                  <Calendar className="w-4 h-4 mr-2 text-green-500" />
+                                  <span>{user.age} years old</span>
+                                </div>
+                              )}
+                              
+                              {user.phone && (
+                                <div className="flex items-center text-gray-600 dark:text-gray-400">
+                                  <Phone className="w-4 h-4 mr-2 text-purple-500" />
+                                  <span>{user.phone}</span>
+                                </div>
+                              )}
+                            </div>
+
+                            {user.skillsKnown && (
+                              <div className="space-y-2">
+                                <h4 className="font-medium text-gray-900 dark:text-gray-200 text-sm">Can teach:</h4>
+                                <div className="flex flex-wrap gap-1">
+                                  {parseSkills(user.skillsKnown).slice(0, 3).map((skill, index) => (
+                                    <Badge key={index} className="text-xs bg-green-100 text-green-700 hover:bg-green-200 transition-colors">
+                                      {skill}
+                                    </Badge>
+                                  ))}
+                                  {parseSkills(user.skillsKnown).length > 3 && (
+                                    <Badge variant="outline" className="text-xs text-gray-500">
+                                      +{parseSkills(user.skillsKnown).length - 3} more
+                                    </Badge>
+                                  )}
+                                </div>
+                              </div>
+                            )}
+
+                            {user.skillsToLearn && (
+                              <div className="space-y-2">
+                                <h4 className="font-medium text-gray-900 dark:text-gray-200 text-sm">Wants to learn:</h4>
+                                <div className="flex flex-wrap gap-1">
+                                  {parseSkills(user.skillsToLearn).slice(0, 3).map((skill, index) => (
+                                    <Badge key={index} variant="outline" className="text-xs border-blue-200 text-blue-700 hover:bg-blue-50 transition-colors">
+                                      {skill}
+                                    </Badge>
+                                  ))}
+                                  {parseSkills(user.skillsToLearn).length > 3 && (
+                                    <Badge variant="outline" className="text-xs text-gray-500">
+                                      +{parseSkills(user.skillsToLearn).length - 3} more
+                                    </Badge>
+                                  )}
+                                </div>
+                              </div>
+                            )}
+
+                            {user.reviews && user.reviews.length > 0 && (
+                              <div className="space-y-2">
+                                <h4 className="font-medium text-gray-900 dark:text-gray-200 text-sm flex items-center">
+                                  <Quote className="w-3 h-3 mr-1" />
+                                  Recent Reviews:
+                                </h4>
+                                <div className="space-y-2 max-h-32 overflow-y-auto">
+                                  {user.reviews.slice(-2).map((review, index) => (
+                                    <div key={review.id} className="bg-yellow-50 dark:bg-yellow-900/20 p-2 rounded-lg border border-yellow-200 dark:border-yellow-700">
+                                      <div className="flex items-center space-x-1 mb-1">
+                                        {renderStars(review.rating)}
+                                        <span className="text-xs text-gray-600 dark:text-gray-400">
+                                          - {review.reviewerName}
+                                        </span>
+                                      </div>
+                                      <p className="text-xs text-gray-700 dark:text-gray-300 italic">
+                                        "{review.comment.length > 80 ? review.comment.substring(0, 80) + '...' : review.comment}"
+                                      </p>
+                                      <p className="text-xs text-blue-600 dark:text-blue-400 mt-1">
+                                        Skill: {review.skillTaught}
+                                      </p>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+
+                            <div className="pt-2">
+                              <Button
+                                onClick={() => handleConnect(user)}
+                                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white transform hover:scale-105 transition-all duration-200"
+                                size="sm"
+                              >
+                                <MessageCircle className="w-4 h-4 mr-2" />
+                                Connect & Chat
+                              </Button>
+                            </div>
+                          </CardContent>
+                        </Card>
                       ))}
                     </div>
-                  )}
-                  
-                  <div className="space-y-2 text-sm">
-                    {user.city && (
-                      <div className="flex items-center text-gray-600 dark:text-gray-400">
-                        <MapPin className="w-4 h-4 mr-2 text-blue-500" />
-                        <span>{user.city}</span>
-                      </div>
-                    )}
-                    
-                    {user.age && (
-                      <div className="flex items-center text-gray-600 dark:text-gray-400">
-                        <Calendar className="w-4 h-4 mr-2 text-green-500" />
-                        <span>{user.age} years old</span>
-                      </div>
-                    )}
-                    
-                    {user.phone && (
-                      <div className="flex items-center text-gray-600 dark:text-gray-400">
-                        <Phone className="w-4 h-4 mr-2 text-purple-500" />
-                        <span>{user.phone}</span>
-                      </div>
-                    )}
-                  </div>
-
-                  {user.skillsKnown && (
-                    <div className="space-y-2">
-                      <h4 className="font-medium text-gray-900 dark:text-gray-200 text-sm">Can teach:</h4>
-                      <div className="flex flex-wrap gap-1">
-                        {parseSkills(user.skillsKnown).slice(0, 3).map((skill, index) => (
-                          <Badge key={index} className="text-xs bg-green-100 text-green-700 hover:bg-green-200 transition-colors">
-                            {skill}
-                          </Badge>
-                        ))}
-                        {parseSkills(user.skillsKnown).length > 3 && (
-                          <Badge variant="outline" className="text-xs text-gray-500">
-                            +{parseSkills(user.skillsKnown).length - 3} more
-                          </Badge>
-                        )}
-                      </div>
-                    </div>
-                  )}
-
-                  {user.skillsToLearn && (
-                    <div className="space-y-2">
-                      <h4 className="font-medium text-gray-900 dark:text-gray-200 text-sm">Wants to learn:</h4>
-                      <div className="flex flex-wrap gap-1">
-                        {parseSkills(user.skillsToLearn).slice(0, 3).map((skill, index) => (
-                          <Badge key={index} variant="outline" className="text-xs border-blue-200 text-blue-700 hover:bg-blue-50 transition-colors">
-                            {skill}
-                          </Badge>
-                        ))}
-                        {parseSkills(user.skillsToLearn).length > 3 && (
-                          <Badge variant="outline" className="text-xs text-gray-500">
-                            +{parseSkills(user.skillsToLearn).length - 3} more
-                          </Badge>
-                        )}
-                      </div>
-                    </div>
-                  )}
-
-                  {user.reviews && user.reviews.length > 0 && (
-                    <div className="space-y-2">
-                      <h4 className="font-medium text-gray-900 dark:text-gray-200 text-sm flex items-center">
-                        <Quote className="w-3 h-3 mr-1" />
-                        Recent Reviews:
-                      </h4>
-                      <div className="space-y-2 max-h-32 overflow-y-auto">
-                        {user.reviews.slice(-2).map((review, index) => (
-                          <div key={review.id} className="bg-yellow-50 dark:bg-yellow-900/20 p-2 rounded-lg border border-yellow-200 dark:border-yellow-700">
-                            <div className="flex items-center space-x-1 mb-1">
-                              {renderStars(review.rating)}
-                              <span className="text-xs text-gray-600 dark:text-gray-400">
-                                - {review.reviewerName}
-                              </span>
-                            </div>
-                            <p className="text-xs text-gray-700 dark:text-gray-300 italic">
-                              "{review.comment.length > 80 ? review.comment.substring(0, 80) + '...' : review.comment}"
-                            </p>
-                            <p className="text-xs text-blue-600 dark:text-blue-400 mt-1">
-                              Skill: {review.skillTaught}
-                            </p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  <div className="pt-2">
-                    <Button
-                      onClick={() => handleConnect(user)}
-                      className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white transform hover:scale-105 transition-all duration-200"
-                      size="sm"
-                    >
-                      <MessageCircle className="w-4 h-4 mr-2" />
-                      Connect & Chat
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="left-4" />
+              <CarouselNext className="right-4" />
+            </Carousel>
+            
+            <div className="text-center mt-6">
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                Swipe or use arrows to browse through {displayedUsers.length} profiles
+              </p>
+            </div>
           </div>
         )}
       </div>
